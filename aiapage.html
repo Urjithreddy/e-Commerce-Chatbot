@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon-Like Bookstore</title>
+    <link rel="stylesheet" href="homestyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* [Your existing CSS styles] */
+
+        /* Chatbot Styles */
+        /* Chatbot Button */
+        #chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #FF9900;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        #chatbot-button:hover {
+            background-color: #FFA500;
+        }
+
+        /* Chatbot Window */
+        .chatbot-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            max-height: 500px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            animation: fadeIn 0.5s;
+        }
+
+        .chatbot-header {
+            background-color: #FF9900;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header span {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        #close-chatbot {
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        .chatbot-body {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        .chatbot-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            font-size: 1em;
+        }
+
+        .chatbot-input button {
+            background-color: #FF9900;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1em;
+        }
+
+        .chatbot-input button:hover {
+            background-color: #FFA500;
+        }
+
+        /* Chat Messages */
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 80%;
+            clear: both;
+        }
+
+        .message.user {
+            background-color: #FF9900;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .message.bot {
+            background-color: #e0e0e0;
+            color: #333;
+            align-self: flex-start;
+            margin-right: auto;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Amazon-Bookstore</a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Browse</a></li>
+                <li><a href="#">Sell</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="#"><i class="fas fa-user"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="container">
+            <h1>Welcome to Amazon-Like Bookstore</h1>
+            <p>Explore, buy, and sell books easily.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="categories">
+            <h2>Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category">
+                    <div class="category-image">
+                        <img src="category1.jpg" alt="Books">
+                    </div>
+                    <div class="category-content">
+                        <h3>Books</h3>
+                        <p>Explore a wide range of books.</p>
+                        <a href="#" class="btn">Shop Now</a>
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="category-image">
+                        <img src="category2.jpg" alt="Textbooks">
+                    </div>
+                    <div class="category-content">
+                        <h3>Textbooks</h3>
+                        <p>New and used textbooks.</p>
+                        <a href="#" class="btn">Shop Now</a>
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="category-image">
+                        <img src="category3.jpg" alt="Magazines">
+                    </div>
+                    <div class="category-content">
+                        <h3>Magazines</h3>
+                        <p>Popular and latest magazines.</p>
+                        <a href="#" class="btn">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="buy-at-glance">
+            <h2>Buy at a Glance</h2>
+            <div class="product-grid">
+                <div class="product">
+                    <h3>Book Title 1</h3>
+                    <p>Author Name</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product">
+                    <h3>Book Title 2</h3>
+                    <p>Author Name</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product">
+                    <h3>Book Title 3</h3>
+                    <p>Author Name</p>
+                    <button>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Amazon-Like Bookstore. All rights reserved.</p>
+    </footer>
+
+    <!-- Chatbot Button -->
+    <div id="chatbot-button">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chatbot Window -->
+    <div id="chatbot-window" class="chatbot-window">
+        <div class="chatbot-header">
+            <span>Chat with Us</span>
+            <span id="close-chatbot">&times;</span>
+        </div>
+        <div class="chatbot-body" id="chatbot-body">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Type your message..." />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <!-- Chatbot JavaScript -->
+    <script>
+        // Get Elements
+        const chatbotButton = document.getElementById('chatbot-button');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const closeChatbot = document.getElementById('close-chatbot');
+        const sendButton = document.getElementById('send-button');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotBody = document.getElementById('chatbot-body');
+
+        // Toggle Chatbot Window
+        chatbotButton.addEventListener('click', () => {
+            chatbotWindow.style.display = 'flex';
+            chatbotInput.focus();
+        });
+
+        closeChatbot.addEventListener('click', () => {
+            chatbotWindow.style.display = 'none';
+        });
+
+        // Send Message on Click
+        sendButton.addEventListener('click', sendMessage);
+
+        // Send Message on Enter Key
+        chatbotInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message === '') return;
+
+            // Display User Message
+            appendMessage(message, 'user');
+
+            // Clear Input
+            chatbotInput.value = '';
+
+            // Simulate Bot Response (You can integrate with a backend or API here)
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                appendMessage(botResponse, 'bot');
+            }, 1000);
+        }
+
+        function appendMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender);
+            messageElement.textContent = message;
+            chatbotBody.appendChild(messageElement);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+
+        function getBotResponse(message) {
+            // Simple predefined responses (Customize as needed)
+            const responses = {
+                'hello': 'Hi there! How can I assist you today?',
+                'hi': 'Hello! What can I do for you?',
+                'help': 'Sure, I am here to help. What do you need assistance with?',
+                'catalog': 'You can browse our catalog by visiting the "Shop by Category" section.',
+                'checkout': 'To checkout, add items to your cart and proceed to the cart icon on the top right.',
+                'default': "I'm sorry, I didn't understand that. Can you please rephrase?"
+            };
+
+            const msg = message.toLowerCase();
+            return responses[msg] || responses['default'];
+        }
+    </script>
+</body>
+
+</html>
